@@ -1,0 +1,16 @@
+.mg-icon{
+    --mg-icon-color: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mg-icon-color);
+}
+
+[class*=mg-icon] + span{
+    margin-left:10px
+}
+@each $type in primary,success,warning,danger,error,info {
+    .mg-icon--$(type){
+        --mg-icon-color: var(--mg-color-$(type))
+    }
+}

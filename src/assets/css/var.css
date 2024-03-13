@@ -1,0 +1,110 @@
+
+
+:root{
+    color-scheme: light;
+    --mg-color-white: #ffffff;
+    --mg-color-black: #000000;
+    --colorstatus: (
+        primary: #409eff,
+        success: #67c23a,
+        warning: #e6a23c,
+        danger: #f56c6c,
+        error: #f56c6c,
+        info: #909399
+    );
+
+    /* primary color */
+    @each $type,$color in var(--colorstatus){
+        --mg-color-$(type): $color;
+        --mg-color-$(type)-dark-2: mix(#000, $(color), .2);
+        @for $i from 1 to 9 {
+            --mg-color-$(type)-light-$(i): mix(#fff, $(color), .$i);
+        }
+    }
+
+    /* 背景色 */
+    --mg-bg-color: #ffffff;
+    --mg-bg-color-page: #f2f3f5;
+    --mg-bg-color-overlay: #ffffff;
+
+    /* 文本色 */
+    --mg-text-color-primary: #303133;
+    --mg-text-color-regular: #606266;
+    --mg-text-color-secondary: #909399;
+    --mg-text-color-placeholder: #a8abb2;
+    --mg-text-color-disabled: #c0c4cc;
+
+    /* border 颜色 */
+    --mg-border-color: #dcdfe6;
+    --mg-border-color-light: #e4e7ed;
+    --mg-border-color-lighter: #ebeef5;
+    --mg-border-color-extra-light: #f2f6fc;
+    --mg-border-color-dark: #d4d7de;
+    --mg-border-color-darker: #cdd0d6;
+
+    /* 填充色 */
+    --mg-fill-color: #f0f2f5;
+    --mg-fill-color-light: #f5f7fa;
+    --mg-fill-color-lighter: #fafafa;
+    --mg-fill-color-extra-light: #fafcff;
+    --mg-fill-color-dark: #ebedf0;
+    --mg-fill-color-darker: #e6e8eb;
+    --mg-fill-color-blank: #ffffff;
+
+    /* 阴影色 */
+    --mg-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, .04), 0px 8px 20px rgba(0, 0, 0, .08);
+    --mg-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, .12);
+    --mg-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, .12);
+    --mg-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, .08), 0px 12px 32px rgba(0, 0, 0, .12), 0px 8px 16px -8px rgba(0, 0, 0, .16);
+    --mg-disabled-bg-color: var(--mg-fill-color-light);
+    --mg-disabled-text-color: var(--mg-text-color-placeholder);
+    --mg-disabled-border-color: var(--mg-border-color-light);
+    --mg-overlay-color: rgba(0, 0, 0, .8);
+    --mg-overlay-color-light: rgba(0, 0, 0, .7);
+    --mg-overlay-color-lighter: rgba(0, 0, 0, .5);
+    --mg-mask-color: rgba(255, 255, 255, .9);
+    --mg-mask-color-extra-light: rgba(255, 255, 255, .3);
+    --mg-border-width: 1px;
+    --mg-border-style: solid;
+    --mg-border-color-hover: var(--mg-text-color-disabled);
+    --mg-border: var(--mg-border-width) var(--mg-border-style) var(--mg-border-color);
+    --mg-svg-monochrome-grey: var(--mg-border-color);
+
+    /* 颜色、大小 */
+    --mg-color-primary-rgb: 64, 158, 255;
+    --mg-color-success-rgb: 103, 194, 58;
+    --mg-color-warning-rgb: 230, 162, 60;
+    --mg-color-danger-rgb: 245, 108, 108;
+    --mg-color-error-rgb: 245, 108, 108;
+    --mg-color-info-rgb: 144, 147, 153;
+    --mg-font-size-extra-large: 20px;
+    --mg-font-size-large: 18px;
+    --mg-font-size-medium: 16px;
+    --mg-font-size-base: 14px;
+    --mg-font-size-small: 13px;
+    --mg-font-size-extra-small: 12px;
+    --mg-font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
+    --mg-font-weight-primary: 500;
+    --mg-font-line-height-primary: 24px;
+    --mg-index-normal: 1;
+    --mg-index-top: 1000;
+    --mg-index-popper: 2000;
+    --mg-border-radius-base: 4px;
+    --mg-border-radius-small: 2px;
+    --mg-border-radius-round: 20px;
+    --mg-border-radius-circle: 100%;
+    --mg-transition-duration: .3s;
+    --mg-transition-duration-fast: .2s;
+    --mg-transition-function-ease-in-out-bezier: cubic-bezier(.645, .045, .355, 1);
+    --mg-transition-function-fast-bezier: cubic-bezier(.23, 1, .32, 1);
+    --mg-transition-all: all var(--mg-transition-duration) var(--mg-transition-function-ease-in-out-bezier);
+    --mg-transition-fade: opacity var(--mg-transition-duration) var(--mg-transition-function-fast-bezier);
+    --mg-transition-md-fade: transform var(--mg-transition-duration) var(--mg-transition-function-fast-bezier), opacity var(--mg-transition-duration) var(--mg-transition-function-fast-bezier);
+    --mg-transition-fade-linear: opacity var(--mg-transition-duration-fast) linear;
+    --mg-transition-border: border-color var(--mg-transition-duration-fast) var(--mg-transition-function-ease-in-out-bezier);
+    --mg-transition-box-shadow: box-shadow var(--mg-transition-duration-fast) var(--mg-transition-function-ease-in-out-bezier);
+    --mg-transition-color: color var(--mg-transition-duration-fast) var(--mg-transition-function-ease-in-out-bezier);
+    --mg-component-size-large: 40px;
+    --mg-component-size: 32px;
+    --mg-component-size-small: 24px;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <p>this is result by running the PROMISE </p>
+        <h1></h1>
+    </section>
+</body>
+<script type="module">
+import MyPromise from "./promise.js";
+const dom = document.body.querySelector("h1");
+const createDom = document.createElement("div");
+
+function createDomFor(text) {
+    const dom = document.createElement("div");
+    const createText = document.createTextNode(text);
+    dom.appendChild(createText);
+    createDom.appendChild(dom);
+    return createDom;
+}
+
+dom.appendChild(createDomFor("run global start:"));
+const mp = new MyPromise(resolve => {
+    dom.appendChild(createDomFor("PROMISE inner world;"));
+    resolve("RESOLVE run");
+    dom.appendChild(createDomFor("PROMISE inner world after resolve run;"));
+});
+mp.then(val => {
+    setTimeout(() => {
+        dom.appendChild(createDomFor(`first THEN after ${val} in the SETTIMEOUT;`));
+    }, 2000)
+    throw new Error("throw a error from first THEN")
+}).catch((err) => {
+    dom.appendChild(createDomFor(`catch: ${err};`));
+}).then(() => {
+    return "second THEN function return value;"
+}).finally((res) => {
+    dom.appendChild(createDomFor(`show me if FINALLY could receive a value: ${res}, after THEN  running;`));
+}).then(res => {
+    dom.appendChild(createDomFor(`run last THEN to show the result: ${res}`));
+});
+
+setTimeout(() => {dom.appendChild(createDomFor("run global SETTIMEOUT;"))});
+dom.appendChild(createDomFor("run global end."))
+
+
+// 实验: rejected 状态的 promise, then 执行完后, then 的状态变为 fullfilled
+// 只要有 函数 处理上一次出现的问题，则状态都应该是 fullfilled
+// const p = new Promise((resolve, reject) => {
+//     resolve(10)
+// });
+// const pThen = p.then(res => {
+//     return res
+// }, null).then(null).finally(() => {
+//     console.log("finally");
+// }).then(res => {
+//     console.log('res: ', res)
+// });
+
+// console.log("pThen: ", pThen)
+
+
+</script>
+</html>

@@ -1,0 +1,59 @@
+
+.mg-alert-wrapper{
+    --mg-alert-padding: 8px 16px;
+    --mg-alert-border-radius-base: var(--mg-border-radius-base);
+    --mg-alert-title-font-size: 13px;
+    --mg-alert-description-font-size: 12px;
+    --mg-alert-close-font-size: 12px;
+    --mg-alert-close-customed-font-size: 13px;
+    --mg-alert-icon-size: 16px;
+    --mg-alert-icon-large-size: 28px;
+    padding: var(--mg-alert-padding);
+    font-size: var(--mg-alert-title-font-size);
+    border-radius: var(--mg-alert-border-radius-base);
+
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.is-center{
+    margin:auto
+}
+
+.mg-alert__icon{
+    font-size: var(--mg-alert-icon-size);
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.fade-leave-from{
+    opacity: 1;
+}
+.fade-leave-to{
+    opacity: 0;
+}
+.fade-leave-active{
+    transition: opacity .2s ease-in-out;
+}
+
+@each $type, $val in (success, info, error, warning),(#67c23a, #909399, #f56c6c,  #e6a23c) {
+    .mg-alert--$(type){
+        background-color: $(val);
+        color: var(--mg-color-white);
+    }
+    .mg-alert--$(type).is-light{
+        --mg-color-$(type)-light-9: mix(#fff, $(val), .9);
+        background-color: var(--mg-color-$(type)-light-9);
+        color: $(val); 
+
+        .mg-alert__closebtn{
+            font-size: var(--mg-alert-close-font-size);
+            color: var(--mg-text-color-placeholder);
+        }
+    }
+}
+
+
+
+

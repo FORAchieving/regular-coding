@@ -1,0 +1,64 @@
+.mg-collapse-wrapper{
+    --mg-collapse-border-color: var(--mg-border-color-lighter);
+    --mg-collapse-header-height: 48px;
+    --mg-collapse-header-bg-color: var(--mg-fill-color-blank);
+    --mg-collapse-header-text-color: var(--mg-text-color-primary);
+    --mg-collapse-header-font-size: 13px;
+    --mg-collapse-content-bg-color: var(--mg-fill-color-blank);
+    --mg-collapse-content-font-size: 13px;
+    --mg-collapse-content-text-color: var(--mg-text-color-primary);
+    border-top: 1px solid var(--mg-collapse-border-color);
+    border-bottom: 1px solid var(--mg-collapse-border-color);
+    /* 1rem = 16px(html{ font-size: 16px }) */
+    padding: 1.5rem;
+    .mg-collapse-item{
+        list-style: none;
+        /* border-top: 1px solid var(--mg-collapse-border-color);
+        border-bottom: 1px solid var(--mg-collapse-border-color); */
+        &__header{
+            margin:0px;
+            height: var(--mg-collapse-header-height);
+            color: var(--mg-collapse-header-text-color);
+            font-size: var(--mg-collapse-header-font-size);
+            /* line-height 为 number 时，计算规则为 number*fontSize,fontSize为元素拥有。 */
+            line-height: var(--mg-collapse-header-height);
+            border-bottom: 1px solid var(--mg-collapse-border-color);
+            transition: border-bottom .15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &.mg-collapse-item__active{
+                border-bottom: transparent;
+            }
+            .mg-icon{
+                transition: transform .1s ease;
+            }
+
+            .click-happen{
+                transform: rotate(90deg);
+            }
+        }
+        /* first-child：查找这组兄弟元素的第一个，找不到就算了
+           first-of-type：根据「同种类型」查找这组兄弟元素中首次出现的元素，也就是说如果第一个没有会继续循环往后找
+           「同种类型」：根据「关键字」:first-of-type中的「关键字」找「同类型」，可能是class相同的，标签相同的
+        
+        */
+        &:first-child .mg-collapse-item__header{
+            border-top: 1px solid var(--mg-collapse-border-color);
+        }
+        &__content{
+            /* padding-bottom: 25px; */
+            border-bottom: 1px solid var(--mg-collapse-border-color);
+            overflow: hidden;
+            .mg-collapse-item-transition__wrapper{
+                padding-bottom: 25px;
+            }
+
+        }
+
+        .fade-enter-active, .fade-leave-active{
+            transition: height .1s ease
+        }
+    }
+}

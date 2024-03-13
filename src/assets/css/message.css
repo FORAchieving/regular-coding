@@ -1,0 +1,58 @@
+.mg-message--wrapper {
+    --mg-message-bg-color: var(--mg-color-info-light-9);
+    --mg-message-border-color: var(--mg-border-color-lighter);
+    --mg-message-padding: 15px 19px;
+    --mg-message-close-size: 16px;
+    --mg-message-close-icon-color: var(--mg-text-color-placeholder);
+    --mg-message-close-hover-color: var(--mg-text-color-secondary);
+
+    border: 1px solid var(--mg-message-border-color);
+    padding:var(--mg-message-padding);
+    background-color: var(--mg-message-bg-color);
+    width: max-content;
+    max-width: calc(100% - 32px);
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform .4s ease-in-out,opacity .2s ease-in-out,top .4s ease;
+
+    .mg-message--content{
+        vertical-align: middle;
+        display: inline-block;
+
+    }
+    .mg-message--icon{
+        vertical-align: middle;
+        margin-right: 10px;
+        size: var(--mg-message-close-size);
+        color: var(--mg-message-close-icon-color);
+    }
+    .mg-message--close{
+        vertical-align: middle;
+        margin-left: 50px;
+        size: var(--mg-message-close-size);
+        color: var(--mg-message-close-icon-color);
+        cursor: pointer;
+
+    }
+}
+
+@each $type in success,warning,error,info {
+    .mg-message--$(type){
+        --mg-message-bg-color: var(--mg-color-$(type)-light-9);
+        --mg-message-border-color: var(--mg-color-$(type)-light-8);
+        --mg-message-text-color: var(--mg-color-$(type));
+        border: 1px solid var(--mg-message-border-color);
+        background-color: var(--mg-message-bg-color);
+        color: var(--mg-message-text-color);
+        .mg-message--icon{
+            color: var(--mg-message-text-color)
+        }
+    }
+}
+
+.mg-message--wrapper.message-enter-from, .mg-message--wrapper.message-leave-to{
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}

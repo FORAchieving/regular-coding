@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue + TS</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+  <!-- (primary,success,warning,danger,error,info),(#409eff,#67c23a,#e6a23c,#f56c6c,#f56c6c,#909399)  -->
+</html>
+<script>
+async function a() {
+  const m = new Promise(resolve => {
+    setTimeout(() => {
+      resolve(" I'm a ");
+    }, 1000);
+  })
+  const n = await m;
+  console.log(n);
+}
+
+async function b() {
+  a();
+  return new Promise(resolve => {
+    setTimeout(() => {
+
+      resolve("i'm b")
+    }, 2000);
+  });
+}
+
+async function c() {
+  const  bR = await b();
+  console.log(bR);
+}
+
+c();
+</script>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>I'm \uD835\uDD38 I tell you $ ¥</section>
+    <div class="toy-vue-wrapper">
+        <span class="toy-vue-number--a"></span>
+        <hr>
+        <span class="toy-vue-number--b"></span>
+    </div>
+</body>
+<script type="module">
+import {reactive, effect, computed, watch } from "./index.js";
+import {inQueue, flushStatus} from "./tools.js";
+const domA = document.querySelector('.toy-vue-number--a');
+const domB = document.querySelector('.toy-vue-number--b');
+const intNumber = reactive({ 'a': 8, 'b': 10, 'c': 200 });
+
+// effect(function changeB() {
+//     effect(function changeA() {
+//         domA.innerHTML = intNumber.a;
+//         console.log("a 改变了")
+//     }, {
+//         scheduler: (fn) => {
+//             inQueue(fn);
+//             flushStatus();
+//         }
+//     });
+//     domB.innerHTML = intNumber.b < 50 ? intNumber.b : 50;
+// });
+
+
+
+// bug:b 变化很多次，changeA 会被多次收集到 a 属性的副作用函数集合中去
+// setTimeout(() => {
+//     intNumber.a = 100;
+//     intNumber.b = 200;
+//     Promise.resolve().then(() => {
+//         intNumber.b = 400;
+//         setTimeout(()=> {
+//             intNumber.a = 300;
+            
+//         }, 3000)
+//     })
+// }, 3000)
+// setTimeout(() => {
+//     intNumber.a ++;
+// }, 3000);
+
+/* watch test start */
+// watch(intNumber, (newVal, oldVal) => {
+//     console.log(newVal.a, oldVal.a);
+// })
+// intNumber.a ++;
+// intNumber.a ++;
+// intNumber.a ++;
+// intNumber.a ++;
+/* watch test end */
+
+/* computed test start */
+// const ac = computed(() => {
+//     return intNumber.a
+// });
+
+//    setInterval(() => {
+//         console.log('ac value1: ', ac.value)
+//    }, 4000)
+/* computed test end */
+
+
+/* for ... in test start */
+// effect(() => {
+//     console.group('------------------')
+//     for(let key in intNumber) {
+//         console.log(key);
+//     }
+// })
+
+// setTimeout(() => {
+//     Promise.resolve().then(() => {
+//         intNumber.a = 400;
+//         intNumber.d = 'new attr';
+//         intNumber.e = "e attr";
+//     }).then(() => {
+//         delete intNumber.a
+//     })
+// }, 3000)
+/* for ... in test end */
+
+/* prototype test start */
+const child = reactive({'name': 'maggie', 'age': "30"});
+const parent = reactive({'occupation': "enginner", "sex": "male"});
+Object.setPrototypeOf(child, parent);
+
+effect(() => {
+    console.log(child.occupation);
+})
+
+setTimeout(() => {
+    child.occupation = "student";
+    console.log('occupation' in child)
+}, 3000)
+/* prototype test end */
+
+
+    
+</script>
+</html>

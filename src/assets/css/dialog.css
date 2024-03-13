@@ -1,0 +1,74 @@
+.mg-dialog-overlay{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.mg-dialog{
+    --mg-dialog-width: 50%;
+    --mg-dialog-margin-top: 15vh;
+    --mg-dialog-bg-color: var(--mg-bg-color);
+    --mg-dialog-box-shadow: var(--mg-box-shadow);
+    --mg-dialog-title-font-size: var(--mg-font-size-large);
+    --mg-dialog-content-font-size: 14px;
+    --mg-dialog-font-line-height: var(--mg-font-line-height-primary);
+    --mg-dialog-padding-primary: 20px;
+    --mg-dialog-border-radius: var(--mg-border-radius-small);
+    height: fit-content;
+    width: var(--mg-dialog-width);
+    margin-top: var(--mg-dialog-margin-top);
+    border-radius: var(--mg-border-radius-small);
+    background-color: var(--mg-dialog-bg-color);
+    transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+
+    
+    .mg-dialog-content--footer{
+        align-self: flex-end;
+        padding: 10px 20px 20px;
+        text-align: right;
+    }
+    .mg-dialog-content--header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 20px 10px;
+        font-size: var(--mg-dialog-title-font-size);
+    }
+    .mg-dialog-content--main{
+        padding: 20px;
+        font-size: var(--mg-dialog-content-font-size);
+    }
+}
+
+.mg-dialog-center{
+    --mg-dialog-margin-top: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dialog-enter-from, .dialog-leave-to{
+    opacity: 0;
+    .mg-dialog{
+        transform: translateY(-10%);
+    }
+}
+
+.dialog-enter-to, .dialog-leave-from{
+    opacity: 1;
+    .mg-dialog{
+        transform: translateY(0%);
+    }
+}
+
+.dialog-enter-active, .dialog-leave-active{
+    transition: opacity .3s ease-in-out;
+}
